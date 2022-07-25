@@ -1,23 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class animatioStateController : MonoBehaviour
+
+
+public class AnimationStateManager : MonoBehaviour
 {
-
     Animator animator;
+    public NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("w"))
+        bool isStopped = (agent.velocity.magnitude == 0f);
+
+        if(isStopped)
         {
             animator.SetBool("isNear", true);
+        }
+
+        if(!isStopped)
+        {
+            animator.SetBool("isNear", false);
         }
     }
 }

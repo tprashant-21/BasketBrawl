@@ -6,6 +6,7 @@ TagManager:
   tags:
   - hitBox
   - fist
+  - BasketBall
   layers:
   - Default
   - TransparentFX

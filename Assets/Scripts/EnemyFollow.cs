@@ -11,7 +11,7 @@ public class EnemyFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemy.SetDestination(player.position);
     }
 
     // Update is called once per frame
@@ -19,4 +19,6 @@ public class EnemyFollow : MonoBehaviour
     {
         enemy.SetDestination(player.position);
     }
+
+
 }

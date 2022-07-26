@@ -13,10 +13,12 @@ public class ScoreKeeper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
+        Debug.Log("The trigger is working");
         if(other.gameObject.CompareTag("BasketBall"))
         {
             score += 1;
             scoreText.text = score.ToString();
+            Debug.Log("BasketBall detected");
         }
     }
     // Start is called before the first frame update

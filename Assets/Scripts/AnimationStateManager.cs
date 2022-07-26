@@ -11,6 +11,8 @@ public class AnimationStateManager : MonoBehaviour
 
     bool isThreeShotDown;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class AnimationStateManager : MonoBehaviour
     void Update()
     {
 
-        bool isStopped = (agent.velocity.magnitude == 0f);
+        bool isStopped = (agent.remainingDistance <= agent.stoppingDistance);
 
         if(isStopped)
         {

@@ -12,6 +12,7 @@ public class HitManager : MonoBehaviour
 
     public AudioSource headHitSound;
     public AudioSource headHitObjectSound;
+    public AudioSource enemyPunchingSound;
 
 
     public Animator animator;
@@ -27,7 +28,7 @@ public class HitManager : MonoBehaviour
         agent.isStopped = true;
         yield return new WaitForSeconds(2);
         animator.SetBool("isThreeShotDown", false);
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(9f);
         agent.isStopped = false;
     }
     
@@ -35,7 +36,8 @@ public class HitManager : MonoBehaviour
     IEnumerator resetAfterAttack()
     {
         isResetting = true;
-        yield return new WaitForSeconds(3);
+        enemyPunchingSound.Play();
+        yield return new WaitForSeconds(2.2f);
         isResetting = false;
     }
 
@@ -45,7 +47,7 @@ public class HitManager : MonoBehaviour
         if(other.gameObject.CompareTag("fist"))
         {
             hitNumber++;
-            Debug.Log("fist detected!");
+            // Debug.Log("fist detected!");
             headHitSound.Play();
             if(hitNumber >= 3)
             {
@@ -62,7 +64,7 @@ public class HitManager : MonoBehaviour
         if(other.gameObject.CompareTag("objects"))
         {
             hitNumber += 3;
-            // animator.SetTrigger("HeadHit");
+            animator.SetTrigger("HeadHit");
             headHitObjectSound.Play();
             animator.SetBool("isThreeShotDown", true);
             StartCoroutine(resetDeath());

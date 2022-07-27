@@ -10,6 +10,10 @@ public class HitManager : MonoBehaviour
 {
     int hitNumber = 0;
 
+    public AudioSource headHitSound;
+    public AudioSource headHitObjectSound;
+
+
     public Animator animator;
     public NavMeshAgent agent;
 
@@ -45,6 +49,7 @@ public class HitManager : MonoBehaviour
         if(other.gameObject.CompareTag("fist"))
         {
             hitNumber++;
+            headHitSound.Play();
             animator.SetTrigger("HeadHit");
             if(hitNumber >= 3)
             {
@@ -58,6 +63,7 @@ public class HitManager : MonoBehaviour
         {
             hitNumber += 5;
             animator.SetTrigger("HeadHit");
+            headHitObjectSound.Play();
             if(hitNumber >= 3)
             {
                 animator.SetBool("isThreeShotDown", true);
@@ -73,6 +79,11 @@ public class HitManager : MonoBehaviour
         // animator = GetComponent<Animator>();
         isResetting = false;
         enemyScore = 0;
+
+        headHitSound = GetComponent<AudioSource>();
+        headHitObjectSound = GetComponent<AudioSource>();
+
+
     }
 
     void Update() 

@@ -18,6 +18,7 @@ public class EnemyFollow : MonoBehaviour
     void Update()
     {
         enemy.SetDestination(player.position);
+        enemy.transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
     }
 
 

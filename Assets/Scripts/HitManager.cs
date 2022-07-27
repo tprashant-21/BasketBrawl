@@ -18,7 +18,7 @@ public class HitManager : MonoBehaviour
     public NavMeshAgent agent;
 
     [SerializeField] Text hitScoreText;
-    int enemyScore = 0;
+    public static int enemyScore = 0;
 
     bool isResetting;
 
@@ -27,14 +27,10 @@ public class HitManager : MonoBehaviour
         agent.isStopped = true;
         yield return new WaitForSeconds(2);
         animator.SetBool("isThreeShotDown", false);
-        StartCoroutine(resetAgentStop());
-    }
-    
-    IEnumerator resetAgentStop()
-    {
         yield return new WaitForSeconds(9);
         agent.isStopped = false;
     }
+    
 
     IEnumerator resetAfterAttack()
     {
@@ -49,27 +45,30 @@ public class HitManager : MonoBehaviour
         if(other.gameObject.CompareTag("fist"))
         {
             hitNumber++;
+            Debug.Log("fist detected!");
             headHitSound.Play();
-            animator.SetTrigger("HeadHit");
             if(hitNumber >= 3)
             {
                 animator.SetBool("isThreeShotDown", true);
                 hitNumber = 0;
                 StartCoroutine(resetDeath());
+            }
+            else
+            {
+                animator.SetTrigger("HeadHit");
             }
         }
 
         if(other.gameObject.CompareTag("objects"))
         {
-            hitNumber += 5;
-            animator.SetTrigger("HeadHit");
+            hitNumber += 3;
+            // animator.SetTrigger("HeadHit");
             headHitObjectSound.Play();
-            if(hitNumber >= 3)
-            {
-                animator.SetBool("isThreeShotDown", true);
-                hitNumber = 0;
-                StartCoroutine(resetDeath());
-            }
+            animator.SetBool("isThreeShotDown", true);
+            StartCoroutine(resetDeath());
+            hitNumber = 0;
+
+            
         }
     }
 
@@ -79,9 +78,6 @@ public class HitManager : MonoBehaviour
         // animator = GetComponent<Animator>();
         isResetting = false;
         enemyScore = 0;
-
-        headHitSound = GetComponent<AudioSource>();
-        headHitObjectSound = GetComponent<AudioSource>();
 
 
     }

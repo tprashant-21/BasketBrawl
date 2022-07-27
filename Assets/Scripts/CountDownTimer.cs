@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CountDownTimer : MonoBehaviour
 {
     float currentTime = 0f;
-    float startingTime = 200f;
+    float startingTime = 100f;
 
     [SerializeField] Text countdownText;
 
@@ -28,7 +28,15 @@ public class CountDownTimer : MonoBehaviour
 
         if(currentTime <= 0)
         {
-            SceneManager.LoadScene("MainMenu");
+            if(ScoreKeeper.score >= HitManager.enemyScore)
+            {
+                SceneManager.LoadScene("WonScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("LoseScene");
+            }
+            
         }
 
         

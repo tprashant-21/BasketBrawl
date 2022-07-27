@@ -9,7 +9,7 @@ public class AnimationStateManager : MonoBehaviour
     Animator animator;
     public NavMeshAgent agent;
 
-    bool isThreeShotDown;
+    // bool isThreeShotDown;
 
 
 

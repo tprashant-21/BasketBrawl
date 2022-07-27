@@ -14,22 +14,28 @@ public class HitManager : MonoBehaviour
     public NavMeshAgent agent;
 
     [SerializeField] Text hitScoreText;
-    int hitScore = 0;
+    int enemyScore = 0;
 
     bool isResetting;
-    
-    IEnumerator resetThreeShotDown()
+
+    IEnumerator resetDeath()
     {
         agent.isStopped = true;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(2);
         animator.SetBool("isThreeShotDown", false);
+        StartCoroutine(resetAgentStop());
+    }
+    
+    IEnumerator resetAgentStop()
+    {
+        yield return new WaitForSeconds(9);
         agent.isStopped = false;
     }
 
     IEnumerator resetAfterAttack()
     {
         isResetting = true;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3);
         isResetting = false;
     }
 
@@ -40,28 +46,41 @@ public class HitManager : MonoBehaviour
         {
             hitNumber++;
             animator.SetTrigger("HeadHit");
-            if(hitNumber == 3)
+            if(hitNumber >= 3)
             {
                 animator.SetBool("isThreeShotDown", true);
                 hitNumber = 0;
-                StartCoroutine(resetThreeShotDown());
+                StartCoroutine(resetDeath());
+            }
+        }
+
+        if(other.gameObject.CompareTag("objects"))
+        {
+            hitNumber += 5;
+            animator.SetTrigger("HeadHit");
+            if(hitNumber >= 3)
+            {
+                animator.SetBool("isThreeShotDown", true);
+                hitNumber = 0;
+                StartCoroutine(resetDeath());
             }
         }
     }
 
+    
     void Start() 
     {
         // animator = GetComponent<Animator>();
         isResetting = false;
-        hitScore = 0;
+        enemyScore = 0;
     }
 
     void Update() 
     {
         if(!isResetting && animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
         {
-            hitScore += 3;
-            hitScoreText.text = hitScore.ToString();
+            enemyScore += 2;
+            hitScoreText.text = enemyScore.ToString();
             StartCoroutine(resetAfterAttack());
         }
        

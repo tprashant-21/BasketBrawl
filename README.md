@@ -1,5 +1,5 @@
 # BasketBrawl
-## A Free and Open Source VR Basket Ball Experience where you ball and brawl at the same time!
+## An Open Source VR Basket Ball Experience where you ball and brawl at the same time!
 
 This project is built for VR enthusiats as well as VR developers who wants try some insanely close to life exprience in a street basketball setting. 
 Tools I have used to build this project:

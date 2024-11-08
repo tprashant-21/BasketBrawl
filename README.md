@@ -20,7 +20,7 @@ But feel free to change the plugin and packages to your needs/requirements in yo
 
 ## Watch the game play!
 
-<a href="https://drive.google.com/file/d/1GjMufC5RlJfBPNFzH1voLtXEcOzn8_XU/view?usp=drive_link" target="_blank">
+<a href="https://drive.google.com/file/d/12QYR2AiFN5fZ28C4fGLDmZHH3jid68Ah/view?usp=drive_link" target="_blank">
   <img src="basketBrawl poster.png" alt="BasketBrawl Poster" width="350" height="400" border="10" />
 </a>
 
